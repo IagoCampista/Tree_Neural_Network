@@ -22,9 +22,13 @@ def paste_random_trees(base_image_path, random_tree_paths, output_path):
     
     base_height, base_width = base_img.shape[:2]
 
-    # Cria o nome do arquivo de texto
+    # Cria o caminho para a subpasta de labels
+    labels_dir = os.path.join(os.path.dirname(output_path), "labels")
+    os.makedirs(labels_dir, exist_ok=True)
+    
+    # Cria o nome do arquivo de texto na subpasta labels
     txt_filename = os.path.splitext(os.path.basename(output_path))[0] + '.txt'
-    txt_path = os.path.join(os.path.dirname(output_path), txt_filename)
+    txt_path = os.path.join(labels_dir, txt_filename)
 
     with open(txt_path, 'w') as txt_file:
         for tree_path in random_tree_paths:
@@ -79,7 +83,7 @@ def paste_random_trees(base_image_path, random_tree_paths, output_path):
     cv2.imwrite(output_path, base_img)
 
 def process_images(source_directory, tree_directory, destination_directory):
-    used_tree_list = 'used_random_trees.txt'
+    used_tree_list = os.path.join(destination_directory, 'used_random_trees.txt')
     
     if os.path.exists(used_tree_list):
         with open(used_tree_list, 'r') as f:
@@ -96,35 +100,22 @@ def process_images(source_directory, tree_directory, destination_directory):
         if file_ext in ['.jpg', '.jpeg', '.png', '.bmp']:
             source_path = os.path.join(source_directory, background_image)
 
-            destination_path = os.path.join(destination_directory, background_image)
-            root, ext = os.path.splitext(destination_path)
-            destination_path = root+"_1"+ext
-            
-            random_trees = get_random_images(tree_directory, 3, used_images)
-            random_tree_paths = [os.path.join(tree_directory, img) for img in random_trees]
-            
-            paste_random_trees(source_path, random_tree_paths, destination_path)
+            # Create three variations for each background image
+            for i in range(1, 4):
+                destination_path = os.path.join(destination_directory, 
+                                             f"{os.path.splitext(background_image)[0]}_{i}{file_ext}")
+                
+                random_trees = get_random_images(tree_directory, 3, used_images)
+                random_tree_paths = [os.path.join(tree_directory, img) for img in random_trees]
+                
+                paste_random_trees(source_path, random_tree_paths, destination_path)
 
-            destination_path = root+"_2"+ext
-            
-            random_trees = get_random_images(tree_directory, 3, used_images)
-            random_tree_paths = [os.path.join(tree_directory, img) for img in random_trees]
-            
-            paste_random_trees(source_path, random_tree_paths, destination_path)
-
-            destination_path = root+"_3"+ext
-            
-            random_trees = get_random_images(tree_directory, 3, used_images)
-            random_tree_paths = [os.path.join(tree_directory, img) for img in random_trees]
-            
-            paste_random_trees(source_path, random_tree_paths, destination_path)
-            
-            # Armazena apenas os nomes dos arquivos, não os caminhos completos
-            used_images.extend(random_trees)
-            
-            with open(used_tree_list, 'w') as f:
-                for item in used_images:
-                    f.write("%s\n" % item)
+                # Armazena apenas os nomes dos arquivos, não os caminhos completos
+                used_images.extend(random_trees)
+                
+                with open(used_tree_list, 'w') as f:
+                    for item in used_images:
+                        f.write("%s\n" % item)
             
             print(f"Processed {background_image}")
 

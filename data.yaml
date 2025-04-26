@@ -1,0 +1,8 @@
+train: /content/googleDrive/MyDrive/Estudos 2024.2/Processamento de Imagens/TreeDataset/images/train/ # Caminho para as imagens de treinamento
+val: /content/googleDrive/MyDrive/Estudos 2024.2/Processamento de Imagens/TreeDataset/images/val # Caminho para as imagens de validação
+
+# Número de classes
+nc: 1
+
+# Nomes das classes
+names: ['arvore']

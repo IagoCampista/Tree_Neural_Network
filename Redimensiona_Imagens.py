@@ -1,7 +1,7 @@
 import os
 import cv2
 
-def resize_images(source_dir, dest_dir, target_size=(1024, 768)):
+def resize_images(source_dir, dest_dir, target_size=(1024, 1024)):
     """
     Resizes all images in source_dir to target_size and saves them in dest_dir.
     Maintains original file extensions and names.
@@ -38,7 +38,7 @@ def resize_images(source_dir, dest_dir, target_size=(1024, 768)):
                 print(f"Error processing {filename}: {str(e)}")
 
 # Example usage
-source_directory = '/Users/iagocampista/Documents/Projects/Image Neural Network Train/01Backgrounds'
-destination_directory = '/Users/iagocampista/Documents/Projects/Image Neural Network Train/ImagensArvores/FittedBackgrounds'
+source_directory = '/Users/iagocampista/Documents/Projects/Tree_Neural_Network/Fundos/01Backgrounds'
+destination_directory = '/Users/iagocampista/Documents/Projects/Tree_Neural_Network/Fundos/SquareBackgrounds'
 
 resize_images(source_directory, destination_directory)
