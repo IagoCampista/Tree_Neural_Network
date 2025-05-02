@@ -40,7 +40,7 @@ def remove_background_and_save(input_dir, output_dir):
             print(f"Processed: {filename}")
 
 # Exemplo de uso:
-input_directory = "/Users/iagocampista/Documents/Projects/Image Neural Network Train/ImagensArvores/Individuais_PNG"
-output_directory = "/Users/iagocampista/Documents/Projects/Image Neural Network Train/ImagensArvores/Individuais_Transparente"
+input_directory =  "/Users/iagocampista/Documents/Projects/Tree_Neural_Network/ImagensArvores/Individuais_teste"
+output_directory = "/Users/iagocampista/Documents/Projects/Tree_Neural_Network/ImagensArvores/Individuais_PNG_Transparente"
 
 remove_background_and_save(input_directory, output_directory)

@@ -57,10 +57,10 @@ def paste_random_trees(base_image_path, random_tree_paths, output_path):
             y_offset = random.randint(0, base_height - tree_height)
 
             # Calcula as informações da árvore
-            center_x = x_offset + tree_width // 2
-            center_y = y_offset + tree_height // 2
-            width = tree_width
-            height = tree_height
+            center_x = (x_offset + tree_width // 2) / base_width
+            center_y = (y_offset + tree_height // 2) / base_height
+            width = tree_width / base_width
+            height = tree_height / base_height
             
             # Escreve as informações no arquivo de texto
             txt_file.write(f"0 {center_x} {center_y} {width} {height}\n")
@@ -122,6 +122,6 @@ def process_images(source_directory, tree_directory, destination_directory):
 # Diretórios
 source_directory = '/Users/iagocampista/Documents/Projects/Tree_Neural_Network/Fundos/SquareBackgrounds'
 tree_directory = '/Users/iagocampista/Documents/Projects/Tree_Neural_Network/ImagensArvores/Individuais_Transparente'
-destination_directory = '/Users/iagocampista/Documents/Projects/Tree_Neural_Network/Dataset1'
+destination_directory = '/Users/iagocampista/Documents/Projects/Tree_Neural_Network/Dataset2'
 
 process_images(source_directory, tree_directory, destination_directory)
