@@ -45,11 +45,11 @@ def paste_random_trees(base_image_path, random_tree_paths, output_image_path):
 
     # Cria o caminho para a subpasta de labels
     # A subpasta labels deve estar no mesmo nível do diretório 'images'
-    # Ex: se output_image_path é /path/to/dataset/train/images/img.jpg,
-    # labels_dir será /path/to/dataset/train/labels
-    output_dir = os.path.dirname(output_image_path) # e.g., /path/to/dataset/train/images
-    parent_dir = os.path.dirname(output_dir)      # e.g., /path/to/dataset/train
-    labels_dir = os.path.join(parent_dir, "labels") # e.g., /path/to/dataset/train/labels
+    # Ex: se output_image_path é /dataset/train/images/img.jpg,
+    # labels_dir será /dataset/train/labels
+    output_dir = os.path.dirname(output_image_path) # Ex. /dataset/train/images
+    parent_dir = os.path.dirname(output_dir)        # Ex. /dataset/train
+    labels_dir = os.path.join(parent_dir, "labels") # EX. /dataset/train/labels
 
     os.makedirs(labels_dir, exist_ok=True)
 
